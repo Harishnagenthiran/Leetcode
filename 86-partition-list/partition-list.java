@@ -24,8 +24,8 @@ class Solution {
             }
             head=head.next;
         }
-           high.next = null;
            low.next = higher.next;
+           high.next = null;
         return lesser.next;
     }
 }

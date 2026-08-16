@@ -6,17 +6,10 @@ class Solution {
     }
     private void generate (List<String>res,int open,int close,String pair,int n){
         if(pair.length()==2*n){
-            //   System.out.println(open+" "+close+" "+pair);
             res.add(pair);
             return;
         }
-        if(open<n){
-            // System.out.println(open+" "+close+" "+pair);
-            generate(res,open+1,close,pair+"(",n);
-        }
-        if(open>close) {
-            //  System.out.println(open+" "+close+" "+pair);
-            generate(res,open,close+1,pair+")",n);
-        }
+        if(open<n) generate(res,open+1,close,pair+"(",n);
+        if(open>close) generate(res,open,close+1,pair+")",n);
     }
 }

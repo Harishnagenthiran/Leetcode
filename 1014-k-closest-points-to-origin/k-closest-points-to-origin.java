@@ -1,40 +1,27 @@
-class Triplet{
-    double root;
-    int x,y;
-    Triplet(double root,int x,int y){
-        this.root = root;
-        this.x = x;
-        this.y = y;
-    }
-    }
-    class TripletComparator implements Comparator<Triplet>{
-        public int compare(Triplet a, Triplet b){
-            if(a.root > b.root)return 1;
-            else if(a.root<b.root)return -1;
-            else return 0;
-        }
-    }
+
+// Tharuni S
+// 2:17 PM (1 minute ago)
+// to Harish
 
 class Solution {
+
     public int[][] kClosest(int[][] points, int k) {
-        Queue <Triplet> q = new PriorityQueue<Triplet>(new TripletComparator());
-        for(int i[]:points){
-            int x = i[0];
-            int y = i[1];
-            double dist = x * x + y * y;
-            q.offer(new Triplet(dist,x,y));
-        }
-                int[][] ans = new int[k][2];
 
-        // Take k closest points
+        PriorityQueue<int[]> minHeap =
+            new PriorityQueue<>(
+                (a, b) -> ((a[0] * a[0] + a[1] * a[1]) - (b[0] * b[0] + b[1] * b[1]))
+            );
+
+        for (int[] point : points) {
+            minHeap.offer(point);
+        }
+
+        int[][] result = new int[k][2];
+
         for (int i = 0; i < k; i++) {
-
-            Triplet current = q.poll();
-
-            ans[i][0] = current.x;
-            ans[i][1] = current.y;
+            result[i] = minHeap.poll();
         }
-        return ans;
-        
+
+        return result;
     }
 }
